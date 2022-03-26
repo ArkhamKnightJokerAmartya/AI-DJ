@@ -16,6 +16,42 @@ function draw(){
   image(video,0,0,700,600);
   fill("#eb7134");
   stroke("#eb7134");
+  
+  if (scoreRightWrist > 0.2){
+  
+  circle(rightWristX,rightWristY,20);
+  if (rightWristY>0 && rightWristY<=100){
+    document.getElementById("speed").innerHTML="Speed= 0.5x";
+    song.rate(0.5);
+  }
+  else if (rightWristY>100 && rightWristY<=200) {
+    document.getElementById("speed").innerHTML="Speed= 1x";
+    song.rate(1);
+  }
+  else if (rightWristY>200 && rightWristY<=300) {
+    document.getElementById("speed").innerHTML="Speed= 1.5x";
+    song.rate(1.5);}
+
+    else if (rightWristY>300 && rightWristY<=400) {
+      document.getElementById("speed").innerHTML="Speed= 2x";
+      song.rate(2);
+    }
+    else if (rightWristY>400 && rightWristY<=500) {
+      document.getElementById("speed").innerHTML="Speed= 2.5x";
+      song.rate(2.5);
+    }
+    else if (rightWristY>500 && rightWristY<=600) {
+      document.getElementById("speed").innerHTML="Speed= 3x";
+      song.rate(3);
+    }
+
+  }
+
+  
+  
+  
+  
+  
   if (scoreLeftWrist > 0.2){
     circle(leftWristX,leftWristY,20);
     InNumberleftwristY= Number(leftWristY);
@@ -46,8 +82,11 @@ function modelLoaded(){
 
 function gotPoses(results){
   if (results.length > 0){
-    scoreLeftWrist=results[0].pose.keypoints[9].score;
+     scoreLeftWrist=results[0].pose.keypoints[9].score;
+     scoreRightWrist=results[0].pose.keypoints[10].score;
+
     console.log("scoreLeftWrist= "+scoreLeftWrist);
+    console.log("scoreRightWrist= "+scoreRightWrist);
     
     console.log(results);
     leftWristX=results[0].pose.leftWrist.x;
